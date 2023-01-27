@@ -1,29 +1,32 @@
 # image-auto-generator
 
-This template should help get you started developing with Vue 3 in Vite.
+This application is auto image generator has made by the power of open AI.
 
-## Recommended IDE Setup
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
 
 ## Project Setup
 
 ```sh
+cd server
+npm insall
+```
+
+```sh
+cd ..
 npm install
 ```
 
 ### Compile and Hot-Reload for Development
 
+To run the server
 ```sh
+cd server
 npm run dev
 ```
 
-### Compile and Minify for Production
-
+To run the frontend app
 ```sh
-npm run build
+cd ..
+npm run dev
 ```
+
