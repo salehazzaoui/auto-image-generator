@@ -25,18 +25,26 @@ app.get('/', (req, res) => {
 app.post('/api/openai', async(req, res) => {
     const {prompt, size} = req.body;
     const imageSize = size === 'small' ? '256x256' : size === 'medium' ? '512x512' : '1024x1024';
-    
-    const response = await openai.createImage({ 
-        prompt: prompt,
-        n: 2,
-        size: imageSize,
-    });
-    
-    image_url = response.data.data[0].url;
-    
-    return res.status(200).json({
-        image_url
-    })
+    try{
+        const response = await openai.createImage({ 
+            prompt: prompt,
+            n: 2,
+            size: imageSize,
+        });
+        
+        image_url = response.data.data[0].url;
+        
+        return res.status(200).json({
+            succes: true,
+            image_url
+        })
+    }catch(error){
+        console.log(error)
+        return res.status(200).json({
+            succes: false,
+            error: error.message
+        })
+    }
 })
 
 app.listen(PORT, () => console.log(`server is running on http://localhost:${PORT}`))

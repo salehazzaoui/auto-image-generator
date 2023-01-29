@@ -6,16 +6,24 @@ import axios from './utile/axios';
 
 const imageUrl = ref(null);
 const pending = ref(false);
+const error = ref(null);
 
 const generateImage = async(prompt, size) => {
   pending.value = true;
-  const response =  await axios.post('/openai', {
+  try {
+    const response =  await axios.post('/openai', {
     prompt: prompt,
     size: size
-  }) 
-  imageUrl.value = response.data.image_url;
-  pending.value = false;
+    }) 
+    imageUrl.value = response.data.image_url;
+    pending.value = false;
+  } catch (e) {
+    console.log(e)
+    error.value=e.error
+  }
 }
+
+//console.log(import.meta.env.VITE_BACKEND_URL)
 
 </script>
 
@@ -28,6 +36,7 @@ const generateImage = async(prompt, size) => {
         </div>
       </div>
       <section class="bg-amber-500">
+        <div v-if="error" class="text-sm text-center text-red-500"> {{ error }} </div>
         <Form @generate-image="(prompt, size) => generateImage(prompt, size)" />
       </section>
       <section class="bg-gray-100 p-2">
